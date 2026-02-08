@@ -36,3 +36,7 @@ temp/
 # Package files
 *.tgz
 package-lock.json
+
+# Test files
+test-results/
+coverage/

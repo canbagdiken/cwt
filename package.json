@@ -1,0 +1,27 @@
+{
+  "name": "cwt-whatsapp-export",
+  "version": "1.0.0",
+  "description": "Export WhatsApp Web conversations in multiple formats with all media files included. 100% local, privacy-focused.",
+  "author": "Can Bagdiken",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canbagdiken/cwt.git"
+  },
+  "keywords": [
+    "whatsapp",
+    "export",
+    "chat",
+    "chrome-extension",
+    "privacy",
+    "backup",
+    "archive",
+    "html",
+    "json",
+    "txt"
+  ],
+  "homepage": "https://github.com/canbagdiken/cwt#readme",
+  "bugs": {
+    "url": "https://github.com/canbagdiken/cwt/issues"
+  }
+}
