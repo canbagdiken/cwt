@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { width: 340px; padding: 10px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f0f2f5; }
+        
+        /* Button */
+        button#btnGet { width: 100%; padding: 12px; background: #00a884; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.2s; }
+        button#btnGet:hover { background: #008f6f; }
+        
+        /* Status Bar */
+        #status { font-size: 12px; margin: 10px 0; color: #54656f; text-align: center; min-height: 20px; font-weight: 500;}
+        
+        /* Chat List */
+        #chatList { max-height: 450px; overflow-y: auto; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        /* Chat Item */
+        .chat-item { 
+            padding: 12px; 
+            border-bottom: 1px solid #e9edef; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .chat-item:last-child { border-bottom: none; }
+        .chat-item:hover { background-color: #f5f6f6; }
+        .chat-item.active { background-color: #d9fdd3; }
+
+        /* Chat Info Group */
+        .chat-info { display: flex; flex-direction: column; }
+        .chat-name { font-weight: 600; font-size: 15px; color: #111b21; }
+        .chat-id { font-size: 11px; color: #667781; margin-top: 2px; }
+
+        /* Download Button (Visual) */
+        .download-btn {
+            background: #e9edef; color: #54656f; border: none; 
+            padding: 5px 10px; border-radius: 4px; font-size: 10px; font-weight: bold; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="btnGet">LOAD CHATS</button>
+    <div id="status">Ready</div>
+    <div id="chatList"></div>
+    <script src="popup.js"></script>
+</body>
+</html>

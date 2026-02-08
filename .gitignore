@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+*.zip
+cwt-extension-*.zip
+cwt-extension/
+STORE.md
+
+# Generated bundles in extension/
+extension/UZIP.js
+extension/wppconnect-wa.js
+extension/*.LICENSE.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Extension packaging
+*.crx
+*.pem

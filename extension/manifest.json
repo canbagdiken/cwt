@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "CWT - Can's WhatsApp Backup Tool",
+  "description": "Export WhatsApp Web conversations with full media support - HTML, TXT, JSON formats",
+  "version": "1.0.0",
+  "author": "Can",
+  "homepage_url": "https://github.com/canbagdiken/cwt",
+  
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_title": "Export WhatsApp Chats"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["wppconnect-wa.js", "UZIP.js", "exporter.js", "inject.js"],
+      "matches": ["https://web.whatsapp.com/*"]
+    }
+  ]
+}
