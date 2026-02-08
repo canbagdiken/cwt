@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.Python
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.crx
+*.pem
+*.zip
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Package files
+*.tgz
+package-lock.json
