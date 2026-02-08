@@ -29,8 +29,13 @@
       // Get active tab
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-      // Check if we're on WhatsApp Web
-      if (!tab.url || !tab.url.includes('web.whatsapp.com')) {
+      // Check if we're on WhatsApp Web - use proper URL parsing
+      const isWhatsAppWeb = tab.url && (
+        tab.url.startsWith('https://web.whatsapp.com/') ||
+        tab.url === 'https://web.whatsapp.com'
+      );
+      
+      if (!isWhatsAppWeb) {
         showStatus('error', 'Please open WhatsApp Web first!');
         exportBtn.disabled = false;
         loadingDiv.style.display = 'none';
@@ -85,14 +90,27 @@
       url: url,
       filename: filename,
       saveAs: true
-    }, () => {
+    }, (downloadId) => {
+      // Check for errors
+      if (chrome.runtime.lastError) {
+        console.error('Download failed:', chrome.runtime.lastError);
+        showStatus('error', 'Download failed: ' + chrome.runtime.lastError.message);
+      } else {
+        console.log('Download started with ID:', downloadId);
+      }
+      // Revoke the blob URL to free memory
       URL.revokeObjectURL(url);
     });
   }
 
   // Check if we're on WhatsApp Web on load
   chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
-    if (!tab.url || !tab.url.includes('web.whatsapp.com')) {
+    const isWhatsAppWeb = tab.url && (
+      tab.url.startsWith('https://web.whatsapp.com/') ||
+      tab.url === 'https://web.whatsapp.com'
+    );
+    
+    if (!isWhatsAppWeb) {
       showStatus('info', 'ℹ️ Please navigate to web.whatsapp.com to export chats');
     }
   });

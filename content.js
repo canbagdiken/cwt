@@ -62,12 +62,26 @@
       let currentHeight = scrollableElement.scrollHeight;
       let attempts = 0;
       const maxAttempts = 50;
+      let noChangeCount = 0;
 
       while (previousHeight !== currentHeight && attempts < maxAttempts) {
         previousHeight = currentHeight;
         scrollableElement.scrollTop = 0;
-        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Dynamic delay: longer if content is loading, shorter if no change
+        const delay = noChangeCount > 2 ? 300 : 500;
+        await new Promise(resolve => setTimeout(resolve, delay));
+        
         currentHeight = scrollableElement.scrollHeight;
+        
+        // Track consecutive no-change iterations for early exit
+        if (currentHeight === previousHeight) {
+          noChangeCount++;
+          if (noChangeCount >= 3) break; // Exit early if no change for 3 iterations
+        } else {
+          noChangeCount = 0;
+        }
+        
         attempts++;
       }
     }
@@ -357,12 +371,23 @@
     header.appendChild(button);
   }
 
-  // Wait for WhatsApp to load and add button
+  // Throttle function to limit call frequency
+  let addButtonTimeout = null;
+  function throttledAddExportButton() {
+    if (addButtonTimeout) return;
+    addButtonTimeout = setTimeout(() => {
+      addExportButton();
+      addButtonTimeout = null;
+    }, 1000); // Only check once per second
+  }
+
+  // Wait for WhatsApp to load and add button - observe specific header area
+  const targetNode = document.querySelector('div[id="app"]') || document.body;
   const observer = new MutationObserver(() => {
-    addExportButton();
+    throttledAddExportButton();
   });
 
-  observer.observe(document.body, {
+  observer.observe(targetNode, {
     childList: true,
     subtree: true
   });
