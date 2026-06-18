@@ -6,7 +6,7 @@
   "author": "Can",
   "homepage_url": "https://github.com/canbagdiken/cwt",
   
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://web.whatsapp.com/*"],
   
   "icons": {

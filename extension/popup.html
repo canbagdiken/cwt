@@ -7,6 +7,10 @@
         
         /* Button */
         button#btnGet { width: 100%; padding: 12px; background: #00a884; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.2s; }
+        
+        /* Search Box */
+        #searchBox { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #d1d7db; border-radius: 6px; font-size: 14px; box-sizing: border-box; background: white; }
+        #searchBox:focus { outline: none; border-color: #00a884; }
         button#btnGet:hover { background: #008f6f; }
         
         /* Status Bar */
@@ -44,6 +48,7 @@
 <body>
     <button id="btnGet">LOAD CHATS</button>
     <div id="status">Ready</div>
+    <input type="text" id="searchBox" placeholder="🔍 Search chats..." style="display:none;">
     <div id="chatList"></div>
     <script src="popup.js"></script>
 </body>
