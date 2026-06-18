@@ -82,6 +82,16 @@ searchBox.addEventListener('input', (e) => {
 chrome.runtime.onMessage.addListener((message) => {
     if (message.request === "getChats") {
         allChats = message.data;
+        
+        // Açık olan chat'i en üste taşı
+        if (message.activeChatId) {
+            const activeIndex = allChats.findIndex(chat => chat.id === message.activeChatId);
+            if (activeIndex > 0) {
+                const activeChat = allChats.splice(activeIndex, 1)[0];
+                allChats.unshift(activeChat);
+            }
+        }
+        
         searchBox.style.display = allChats.length > 0 ? 'block' : 'none';
         searchBox.value = '';
         renderChats(allChats);

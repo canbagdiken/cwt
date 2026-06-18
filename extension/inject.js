@@ -54,6 +54,17 @@
         async handleGetChats() {
             try {
                 const chats = await WPP.chat.list();
+                
+                // Açık olan chat'i tespit et
+                let activeChatId = null;
+                try {
+                    const activeChat = await WPP.chat.getActiveChat();
+                    if (activeChat && activeChat.id) {
+                        activeChatId = activeChat.id._serialized || activeChat.id;
+                    }
+                } catch (e) {
+                    console.log('[CWT] No active chat detected');
+                }
 
                 const processedChats = chats.map(c => {
                     const contact = c.contact || {};
@@ -64,7 +75,7 @@
                     return { name: name, id: rawId, phone: phone };
                 });
                 
-                this.sendBack({ request: "getChats", data: processedChats });
+                this.sendBack({ request: "getChats", data: processedChats, activeChatId: activeChatId });
                 
             } catch (e) {
                 console.error("Sohbet listesi hatası:", e);
